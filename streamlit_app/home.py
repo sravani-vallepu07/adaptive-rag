@@ -15,7 +15,7 @@ st.divider()
 if "session_id" not in st.session_state:
     st.session_state.session_id = None
 
-username = st.text_input("Enter your name to start:", placeholder="e.g. Varun")
+username = st.text_input("Enter your name to start:", placeholder="e.g. Sravani")
 
 if st.button("Start Chatting", type="primary"):
     if username.strip():

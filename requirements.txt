@@ -4,16 +4,15 @@ langchain
 langgraph
 langchain-groq
 langchain-community
-langchain-huggingface
 langchain-qdrant
 qdrant-client
+fastembed
 pydantic
 streamlit
 python-dotenv
 tavily-python
 pypdf
 pyyaml
-sentence-transformers
 python-multipart
 requests
 typing-extensions

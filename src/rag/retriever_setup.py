@@ -1,4 +1,4 @@
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings import FastEmbedEmbeddings
 from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
@@ -7,8 +7,8 @@ from src.core.logger import get_logger
 
 logger = get_logger(__name__)
 
-# Free embeddings - downloads 90MB on first run only
-embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+# Lightweight ONNX embeddings (<100MB RAM, optimized for Render free tier)
+embeddings = FastEmbedEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 # Connect to Qdrant Cloud
 qdrant_client = QdrantClient(

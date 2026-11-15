@@ -11,6 +11,9 @@ logger = get_logger(__name__)
 @router.post("/query")
 async def query_rag(request: QueryRequest):
     try:
+        # Retrieve recent history before saving current query
+        history = await get_history(request.session_id)
+
         try:
             await save_message(request.session_id, "user", request.query)
         except Exception as db_err:
@@ -23,6 +26,7 @@ async def query_rag(request: QueryRequest):
             "documents": [],
             "answer": None,
             "rewrite_count": 0,
+            "chat_history": history[-6:] if history else [],
         })
 
         answer = result.get("answer", "Sorry, I couldn't find an answer.")

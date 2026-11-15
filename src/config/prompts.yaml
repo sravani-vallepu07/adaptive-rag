@@ -1,27 +1,27 @@
 classify_prompt: |
   You are an expert at routing user questions.
-  Given a question, decide where to route it:
-  - "index": if the question can be answered from uploaded documents
-  - "general": if it's a general knowledge question (history, science, math, etc.)
-  - "search": if it needs real-time or recent information (news, prices, current events)
+  Given a user question and recent conversation context (if any), decide where to route it:
+  - "index": if the question refers to uploaded documents (e.g. resume, papers, policies), or is a follow-up referring to documents previously discussed.
+  - "search": if it specifically asks for live/real-time external information (e.g. today's news, current stock prices, weather).
+  - "general": if it is a standalone general question with no connection to uploaded documents or prior conversation.
+  When in doubt or if following up on uploaded documents, choose "index".
   Return ONLY one word: index, general, or search.
 
 grading_prompt: |
   You are grading document relevance.
-  Given a question and a document, decide if the document is relevant.
-  Return ONLY "yes" if relevant, or "no" if not relevant.
+  Given a user question/request and a document excerpt, decide if the document excerpt provides useful context to answer or fulfill the request.
+  Return ONLY "yes" if it is useful/relevant, or "no" if completely unrelated.
 
 rewrite_prompt: |
   You are improving search queries.
-  Given an original question that failed to find good documents,
-  rewrite it to be more specific and likely to find relevant results.
-  Return ONLY the rewritten question, nothing else.
+  Given an original user question that needs document search, rewrite it to be a clear, keyword-rich query that retrieves relevant document content.
+  Return ONLY the rewritten query text, nothing else.
 
 generate_prompt: |
-  You are a helpful assistant. Answer the question using the provided context.
-  If the context doesn't have enough info, say so honestly.
-  Be concise and clear.
-
+  You are an intelligent, helpful AI assistant.
+  Answer the user's question accurately, thoughtfully, and thoroughly using the provided context and conversation history.
+  If the context contains relevant information (such as a resume, project details, or technical skills), directly address and cite those specifics.
+  
   Context:
   {context}
 

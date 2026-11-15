@@ -33,4 +33,4 @@ vectorstore = QdrantVectorStore(
     collection_name=QDRANT_DOCS_COLLECTION,
     embedding=embeddings,
 )
-retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
+retriever = vectorstore.as_retriever(search_kwargs={"k": 8})
